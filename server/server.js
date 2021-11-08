@@ -10,4 +10,21 @@ app.use('/login', (req, res) => {
   });
 })
 
+app.use('/fetch', (req, res) => {
+  res.send([{
+    id: 1,
+    name: 'name1',
+    user_id: 1,
+    message: 'Test Message1.',
+    created_at: '2021-11-21T08:00:00.000Z',
+  },
+  {
+    id: 2,
+    name: 'name2',
+    user_id: 2,
+    message: 'Test Message2.',
+    created_at: '2021-11-22T12:00:00.000Z',
+  }]);
+})
+
 app.listen(8080, () => console.log(`API is running on http://localhost:8080/login`));
