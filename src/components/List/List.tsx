@@ -1,55 +1,63 @@
 import React, { useState, useEffect } from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+const cloneDeep = require('clone-deep');
 
-type list = {
-  name: string,
-  user_id: number,
-  message: string,
-  created_at: string,
-}
+// type list = {
+//   id: number,
+//   name: string,
+//   user_id: number,
+//   message: string,
+//   created_at: string,
+// }
+
+const columns: GridColDef[] = [
+  { field: 'id', headerName: 'ID', width: 90 },
+  {
+    field: 'user_id',
+    headerName: 'User Id',
+    width: 150,
+    editable: true,
+  },
+  {
+    field: 'message',
+    headerName: 'Massage',
+    width: 150,
+    editable: true,
+  },
+  {
+    field: 'created_at',
+    headerName: 'Created At',
+    width: 160,
+  },
+];
 
 export const List = () => {
   const [list, setList] = useState([])
   useEffect(() => {
-    fetch('http://localhost:8080/fetch', {method: 'GET'})
+    fetch('/fetch', {method: 'GET'})
       .then(res => res.json())
       .then(data => {
         setList(data)
     });
   }, [])
+  // セルの更新
+  const changeCell = (v: any) => {
+    let newValue = cloneDeep(list); /* lodashでstateをディープコピー */
+    let idx = list.findIndex((d: any) => d.id === v.id);  /* 該当データのindexを取得 */
+    newValue[idx][v.field] = v.value;
+    setList(newValue)  /* 編集されたデータを置き換える */
+  }
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="right">UserId</TableCell>
-            <TableCell align="right">Message</TableCell>
-            <TableCell align="right">CreatedAt</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {list.map((row: list) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.user_id}</TableCell>
-              <TableCell align="right">{row.message}</TableCell>
-              <TableCell align="right">{row.created_at}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div style={{ height: 400, width: '100%' }}>
+      <DataGrid
+        rows={list}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+        checkboxSelection
+        disableSelectionOnClick
+        onCellEditCommit={changeCell}
+      />
+    </div>
   );
 }

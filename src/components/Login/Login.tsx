@@ -7,7 +7,7 @@ type Props = {
 }
 
 async function loginUser(credentials: { username: string | undefined; password: string | undefined; }) {
-  return fetch('http://localhost:8080/login', {
+  return fetch('/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
