@@ -6,7 +6,7 @@ import { Dashboard } from '@/components/Dashboard/Dashboard';
 import { Login } from '@/components/Login/Login';
 import { useToken } from './useToken';
 
-export const App = () => {
+export const App: React.FC = () => {
   const { token, setToken } = useToken();
   return (
     <div css={wrapper}>

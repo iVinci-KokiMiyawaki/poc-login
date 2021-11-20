@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires, no-undef */
 const path = require('path');
 
 module.exports = {

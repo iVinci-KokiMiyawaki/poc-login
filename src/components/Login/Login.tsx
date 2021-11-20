@@ -5,9 +5,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-// import './Login.css';
 import { userToken } from '@/types/userToken';
-
 
 type Props = {
   setToken: (userToken: userToken) => void,
@@ -39,7 +37,7 @@ export const Login: React.FC<Props> = ({ setToken }) => {
 
   return(
     <div css={loginWrapper}>
-      <h1>Rovin Pov Log in</h1>
+      <h1>Rovin Poc</h1>
       <Box
         css={form}
         component="form"
@@ -61,13 +59,17 @@ export const Login: React.FC<Props> = ({ setToken }) => {
           variant="outlined"
           onChange={e => setPassword(e.target.value)}
         />
-        <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+        <Button variant="contained" onClick={handleSubmit}>Login</Button>
       </Box>
     </div>
   )
 }
 
 const loginWrapper = css({
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translateY(-50%) translateX(-50%)",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",

@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { userToken } from '../../types/userToken';
+import { userToken } from '@/types/userToken';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useToken = () => {
   const getToken = () => {
     const tokenString = sessionStorage.getItem('token');

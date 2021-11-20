@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-const cloneDeep = require('clone-deep');
+import { DataGrid, GridCellEditCommitParams, GridCellValue, GridColDef } from '@mui/x-data-grid';
+import cloneDeep from 'clone-deep';
 
-// type list = {
-//   id: number,
-//   name: string,
-//   user_id: number,
-//   message: string,
-//   created_at: string,
-// }
+type list = {
+  id: number,
+  name: string,
+  user_id: number,
+  message: string,
+  created_at: string,
+  [key: string]: GridCellValue,
+}
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -31,8 +32,8 @@ const columns: GridColDef[] = [
   },
 ];
 
-export const List = () => {
-  const [list, setList] = useState([])
+export const List: React.FC = () => {
+  const [list, setList] = useState<Array<list>>([])
   useEffect(() => {
     fetch('/fetch', {method: 'GET'})
       .then(res => res.json())
@@ -41,11 +42,13 @@ export const List = () => {
     });
   }, [])
   // セルの更新
-  const changeCell = (v: any) => {
-    let newValue = cloneDeep(list); /* lodashでstateをディープコピー */
-    let idx = list.findIndex((d: any) => d.id === v.id);  /* 該当データのindexを取得 */
-    newValue[idx][v.field] = v.value;
-    setList(newValue)  /* 編集されたデータを置き換える */
+  const changeCell = (v: GridCellEditCommitParams) => {
+    setList((oldState) => {
+      const newValue = cloneDeep(list);
+      const idx = list.findIndex((d) => d.id === v.id);
+      newValue[idx][v.field] = v.value;
+      return oldState;
+    });
   }
   return (
     <div style={{ height: 400, width: '100%' }}>
