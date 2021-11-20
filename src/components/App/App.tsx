@@ -1,14 +1,15 @@
 import React from 'react';
+import { css } from "@emotion/react";
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { Dashboard } from '../Dashboard/Dashboard';
-import { Login } from '../Login/Login';
+
+import { Dashboard } from '@/components/Dashboard/Dashboard';
+import { Login } from '@/components/Login/Login';
 import { useToken } from './useToken';
-import './App.css';
 
 export const App = () => {
   const { token, setToken } = useToken();
   return (
-    <div className="wrapper">
+    <div css={wrapper}>
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
@@ -25,3 +26,7 @@ export const App = () => {
     </div>
   );
 }
+const wrapper = css({
+  height: "100%",
+  padding: "20px",
+});

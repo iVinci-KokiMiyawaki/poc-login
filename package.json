@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/preset-react": "^7.16.0",
+    "@craco/craco": "^6.4.1",
+    "@emotion/babel-plugin": "^11.3.0",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@material-ui/core": "^4.12.3",
@@ -29,14 +32,8 @@
   "proxy": "http://localhost:8080",
   "scripts": {
     "server": "node server/server.js",
-    "start": "react-scripts start",
-    "build": "react-scripts build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "start": "craco start",
+    "build": "craco build"
   },
   "browserslist": {
     "production": [
