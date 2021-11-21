@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { css } from "@emotion/react";
 
 import Button from '@mui/material/Button';
@@ -12,7 +12,7 @@ type Props = {
 }
 
 async function loginUser(credentials: { username: string | undefined; password: string | undefined; }) {
-  return fetch('/login', {
+  return fetch('/api/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

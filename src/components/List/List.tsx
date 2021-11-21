@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { DataGrid, GridCellEditCommitParams, GridCellValue, GridColDef } from '@mui/x-data-grid';
 import cloneDeep from 'clone-deep';
 
@@ -35,7 +35,7 @@ const columns: GridColDef[] = [
 export const List: React.FC = () => {
   const [list, setList] = useState<Array<list>>([])
   useEffect(() => {
-    fetch('/fetch', {method: 'GET'})
+    fetch('api/fetch', {method: 'GET'})
       .then(res => res.json())
       .then(data => {
         setList(data)

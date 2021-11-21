@@ -4,13 +4,14 @@ const app = express();
 const port = 8080;
 app.use(cors());
 
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
+  console.log(`API is running on http://localhost:8080/api/login`);
   res.send({
     token: 'test123'
   });
 })
 
-app.get('/fetch', (req, res) => {
+app.get('/api/fetch', (req, res) => {
   res.send([{
     id: 1,
     user_id: 'test1',
@@ -34,7 +35,7 @@ app.get('/fetch', (req, res) => {
   }]);
 })
 
-app.get('/profile/:user_id', (req, res) => {
+app.get('/api/profile/:user_id', (req, res) => {
   res.send([{
     id: 2,
     user_id: 'test2',

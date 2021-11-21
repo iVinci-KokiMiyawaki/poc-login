@@ -1,4 +1,3 @@
-import React from 'react';
 import { List } from '@/components/List/List';
 
 export const Dashboard: React.FC = () => {
