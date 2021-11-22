@@ -1,3 +1,4 @@
 export type userToken = {
-  token: string;
+  status: string,
+  token: string,
 }

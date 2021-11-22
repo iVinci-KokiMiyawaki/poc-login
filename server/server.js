@@ -6,7 +6,14 @@ app.use(cors());
 
 app.post('/login', (req, res) => {
   res.send({
+    status: 'success',
     token: 'test123'
+  });
+})
+
+app.post('/logout', (req, res) => {
+  res.send({
+    status: 'success'
   });
 })
 

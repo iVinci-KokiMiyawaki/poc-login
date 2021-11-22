@@ -9,15 +9,21 @@ export const useToken = () => {
     if (tokenString !== null) userToken = JSON.parse(tokenString);
     return userToken?.token
   };
-  const [token, setToken] = useState(getToken());
+  const [token, setToken] = useState<string>(getToken());
 
-  const saveToken = (userToken: userToken) => {
+  const saveToken = async (userToken: userToken) => {
     sessionStorage.setItem('token', JSON.stringify(userToken));
     setToken(userToken.token);
   };
 
+  const removeToken = async () => {
+    sessionStorage.removeItem('token');
+    setToken('');
+  };
+
   return {
-    setToken: saveToken,
+    saveToken: saveToken,
+    removeToken: removeToken,
     token
   };
 }

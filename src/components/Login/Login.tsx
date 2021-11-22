@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { css } from "@emotion/react";
+import { useNavigate } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -8,7 +9,7 @@ import TextField from '@mui/material/TextField';
 import { userToken } from '@/types/userToken';
 
 type Props = {
-  setToken: (userToken: userToken) => void,
+  saveToken: (userToken: userToken) => void,
 }
 
 async function loginUser(credentials: { username: string | undefined; password: string | undefined; }) {
@@ -22,19 +23,23 @@ async function loginUser(credentials: { username: string | undefined; password: 
   .then(data => data.json())
 }
 
-export const Login: React.FC<Props> = ({ setToken }) => {
+export const Login: React.FC<Props> = ({ saveToken }) => {
   const [username, setUserName] = useState<string | undefined>();
   const [password, setPassword] = useState<string | undefined>();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    const token = await loginUser({
+    const response = await loginUser({
       username,
       password
     });
-    setToken(token);
+    if (response.status === 'success') {
+      await saveToken(response);
+      navigate('/');
+    }
   }
-
+  console.log('Login');
   return(
     <div css={loginWrapper}>
       <h1>Rovin Poc</h1>

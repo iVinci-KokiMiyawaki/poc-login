@@ -1,29 +1,52 @@
 import React from 'react';
 import { css } from "@emotion/react";
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { Dashboard } from '@/components/Dashboard/Dashboard';
 import { Login } from '@/components/Login/Login';
-import { useToken } from './useToken';
+import { Header } from '@/components/Header/Header'
+
+import { useToken } from '@/constants/useToken';
+
+function RequireAuth({ children }: { children: JSX.Element }) {
+  const { token } = useToken();
+  const location = useLocation();
+  if (!token) {
+    return <Navigate to="/login" state={{ from: location }} />;
+  }
+  return children;
+}
+
+function LoginPage() {
+  const { token, saveToken } = useToken();
+  const location = useLocation();
+  if (token) {
+    return <Navigate to="/dashboard" state={{ from: location }} />;
+  }
+  return <Login saveToken={saveToken} />;
+}
 
 export const App: React.FC = () => {
-  const { token, setToken } = useToken();
   return (
-    <div css={wrapper}>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            {!token ? <Redirect to="/login" /> : <Redirect to="/dashboard" />}
-          </Route>
-          <Route path="/login">
-            {!token ? <Login setToken={setToken} /> : <Redirect to="/dashboard" />}
-          </Route>
-          <Route path="/dashboard">
-            {!token ? <Redirect to="/login" /> : <Dashboard />}
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Header />
+      <div css={wrapper}>
+        <Routes>
+          <Route path="/" element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          } />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/dashboard" element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          } />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 const wrapper = css({
