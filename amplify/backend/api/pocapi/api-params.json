@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/items",
+      "lambdaFunction": "pocUserList",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/items"
+    }
+  ],
+  "resourceName": "pocapi",
+  "apiName": "pocapi",
+  "functionArns": [
+    {
+      "lambdaFunction": "pocUserList"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-poclogin-dev-72635-authRole",
+    "unAuthRoleName": "amplify-poclogin-dev-72635-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "pocUserList",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

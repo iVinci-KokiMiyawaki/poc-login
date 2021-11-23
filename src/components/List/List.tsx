@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Amplify, { API, Auth } from 'aws-amplify'
 import { DataGrid, GridCellEditCommitParams, GridCellValue, GridColDef } from '@mui/x-data-grid';
 import cloneDeep from 'clone-deep';
 
@@ -35,11 +36,20 @@ const columns: GridColDef[] = [
 export const List: React.FC = () => {
   const [list, setList] = useState<Array<list>>([])
   useEffect(() => {
-    fetch('/fetch', {method: 'GET'})
-      .then(res => res.json())
-      .then(data => {
-        setList(data)
-    });
+    const getUserList = async () => {
+      const user = await Auth.currentAuthenticatedUser();
+      const token = user.signInUserSession.idToken.jwtToken;
+      const APIName = 'pocapi'
+      const path = '/items'
+      const myInit = {
+        headers: {
+          Authorization: token,
+        },
+      };
+      const res = await API.get(APIName, path, myInit);
+      setList(res.list)
+    }
+    getUserList();
   }, [])
   // セルの更新
   const changeCell = (v: GridCellEditCommitParams) => {

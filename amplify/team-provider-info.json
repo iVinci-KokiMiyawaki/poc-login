@@ -1,0 +1,32 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-poclogin-dev-72635-authRole",
+      "UnauthRoleArn": "arn:aws:iam::070681543031:role/amplify-poclogin-dev-72635-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::070681543031:role/amplify-poclogin-dev-72635-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-poclogin-dev-72635-deployment",
+      "UnauthRoleName": "amplify-poclogin-dev-72635-unauthRole",
+      "StackName": "amplify-poclogin-dev-72635",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:070681543031:stack/amplify-poclogin-dev-72635/49993700-4be3-11ec-9e15-0ac8ef86eca5",
+      "AmplifyAppId": "d35ykggqqelw98"
+    },
+    "categories": {
+      "auth": {
+        "poclogin12be5298": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d35ykggqqelw98",
+          "type": "manual"
+        }
+      },
+      "function": {
+        "pocUserList": {
+          "deploymentBucketName": "amplify-poclogin-dev-72635-deployment",
+          "s3Key": "amplify-builds/pocUserList-33616657784676734653-build.zip"
+        }
+      }
+    }
+  }
+}
