@@ -1,19 +1,19 @@
 # 開発環境
 
-### Amplify CLIのインストール
+### Amplify CLI のインストール
 
 https://docs.amplify.aws/cli/start/install/
 
 ### `yarn`
 
-package.jsonに記載されたモジュールをインストール
+package.json に記載されたモジュールをインストール
 
-###  `amplify init`
+### `amplify init`
 
-Amplify初期設定（既存の環境を利用）
+Amplify 初期設定（既存の環境を利用）
 実行することで `src` 配下に `aws-exports.js` が作成される。
 
-``` sh
+```sh
 $ amplify init
 Note: It is recommended to run this command from the root of your app directory
 ? Do you want to use an existing environment? Yes
@@ -43,17 +43,16 @@ Try "amplify add api" to create a backend API and then "amplify publish" to depl
 
 ```
 
-###  `amplify status`
+### `amplify status`
 
 初期設定を行うと下記の状態になる
-
 
 ```sh
 
 $ amplify status
 
     Current Environment: dev
-    
+
 ┌──────────┬──────────────────┬───────────┬───────────────────┐
 │ Category │ Resource name    │ Operation │ Provider plugin   │
 ├──────────┼──────────────────┼───────────┼───────────────────┤
@@ -68,7 +67,7 @@ $ amplify status
 
 REST API endpoint: https://xxxxxxxxxx.amazonaws.com/dev
 
-Amplify hosting urls: 
+Amplify hosting urls:
 ┌──────────────┬───────────────────────────────────────────┐
 │ FrontEnd Env │ Domain                                    │
 ├──────────────┼───────────────────────────────────────────┤
@@ -77,10 +76,50 @@ Amplify hosting urls:
 
 ```
 
-###  `amplify publish`
+### `amplify publish`
 
 ホスティングの開始
 
 ### `yarn start`
 
 ローカル環境で立ち上げる場合 [http://localhost:3000](http://localhost:3000)
+
+### Prettier
+
+https://prettier.io/docs/en/options.html
+
+```json
+// デフォルト設定
+{
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": false,
+  "quoteProps": "as-needed",
+  "jsxSingleQuote": false,
+  "trailingComma": "none",
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "arrowParens": "avoid",
+  "rangeStart": 0,
+  "rangeEnd": Infinity,
+  "parser": "none",
+  "filepath": "none",
+  "requirePragma": false,
+  "insertPragma": false,
+  "proseWrap": "preserve",
+  "htmlWhitespaceSensitivity": "css",
+  "vueIndentScriptAndStyle": false,
+  "endOfLine": "auto",
+}
+
+// 当環境の設定
+{
+  "printWidth": 100,
+  "singleQuote": true,
+  "bracketSameLine": true,
+  "endOfLine": "lf"
+}
+
+```

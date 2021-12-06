@@ -6,14 +6,17 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended", // 型を必要としない基本ルール
+    "plugin:@typescript-eslint/recommended-requiring-type-checking", // 型情報が必要な基本ルール
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 13,
+    "ecmaVersion": 12,
     "sourceType": "module"
   },
   "plugins": ["react", "@typescript-eslint"],
